@@ -1,3 +1,31 @@
+<?php
+include "koneksi.php";
+
+$auto = mysqli_query($conn, "select max(kd_kat) as max_code from categories");
+$hasil = mysqli_fetch_array($auto);
+$code = $hasil['max_code'];
+if ($code == NULL) {
+  $urutan = 0;
+} else {
+  $urutan = (int) substr($code, 1, 3);
+}
+$urutan++;
+$huruf = "K";
+$kd_kat = $huruf . sprintf("%03s", $urutan);
+
+if (isset($_POST['simpan'])) {
+  $nm_kat = $_POST['nm_kat'];
+
+  $query = mysqli_query($conn, "INSERT INTO categories(kd_kat, category_name) VALUES ('$kd_kat', '$nm_kat')");
+  if ($query) {
+    echo "<script>alert('Data berhasil ditambahkan!')</script>";
+    header("refresh:0, kategori_produk.php");
+  } else {
+    echo "<script>alert('Data gagal ditambahkan!')</script>";
+    header("refresh:0, kategori_produk.php");
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +33,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Kategori Produk - InventoriKirana</title>
+  <title>Data Produk - InventoriKirana</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -33,276 +61,148 @@
 
 <body>
 
-   <!-- ======= Header ======= -->
-   <header id="header" class="header fixed-top d-flex align-items-center">
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
 
-<div class="d-flex align-items-center justify-content-between">
-  <a href="index.html" class="logo d-flex align-items-center">
-    <img src="assets/img/logo.png" alt="">
-    <span class="d-none d-lg-block">InventoriKirana</span>
-  </a>
-  <i class="bi bi-list toggle-sidebar-btn"></i>
-</div><!-- End Logo -->
-
-
-
-<nav class="header-nav ms-auto">
-  <ul class="d-flex align-items-center">
-
-    <li class="nav-item d-block d-lg-none">
-      <a class="nav-link nav-icon search-bar-toggle " href="#">
-        <i class="bi bi-search"></i>
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block">InventoriKirana</span>
       </a>
-    </li><!-- End Search Icon-->
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
 
-  
-      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-        <li class="dropdown-header">
-          You have 4 new notifications
-          <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
 
-        <li class="notification-item">
-          <i class="bi bi-exclamation-circle text-warning"></i>
-          <div>
-            <h4>Lorem Ipsum</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
-            <p>30 min. ago</p>
-          </div>
-        </li>
 
-        <li>
-          <hr class="dropdown-divider">
-        </li>
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
 
-        <li class="notification-item">
-          <i class="bi bi-x-circle text-danger"></i>
-          <div>
-            <h4>Atque rerum nesciunt</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
-            <p>1 hr. ago</p>
-          </div>
-        </li>
-
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-
-        <li class="notification-item">
-          <i class="bi bi-check-circle text-success"></i>
-          <div>
-            <h4>Sit rerum fuga</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
-            <p>2 hrs. ago</p>
-          </div>
-        </li>
-
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-
-        <li class="notification-item">
-          <i class="bi bi-info-circle text-primary"></i>
-          <div>
-            <h4>Dicta reprehenderit</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
-            <p>4 hrs. ago</p>
-          </div>
-        </li>
-
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-        <li class="dropdown-footer">
-          <a href="#">Show all notifications</a>
-        </li>
-
-      </ul><!-- End Notification Dropdown Items -->
-
-    </li><!-- End Notification Nav -->
-
-    
-
-      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-        <li class="dropdown-header">
-          You have 3 new messages
-          <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-
-        <li class="message-item">
-          <a href="#">
-            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-            <div>
-              <h4>Maria Hudson</h4>
-              <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-              <p>4 hrs. ago</p>
-            </div>
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
           </a>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
+        </li><!-- End Search Icon-->
 
-        <li class="message-item">
-          <a href="#">
-            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-            <div>
-              <h4>Anna Nelson</h4>
-              <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-              <p>6 hrs. ago</p>
-            </div>
-          </a>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
+        </li><!-- End Messages Nav -->
 
-        <li class="message-item">
-          <a href="#">
-            <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-            <div>
-              <h4>David Muldon</h4>
-              <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-              <p>8 hrs. ago</p>
-            </div>
-          </a>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
+        <li class="nav-item dropdown pe-3">
 
-        <li class="dropdown-footer">
-          <a href="#">Show all messages</a>
-        </li>
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
 
-      </ul><!-- End Messages Dropdown Items -->
+          </a><!-- End Profile Iamge Icon -->
 
-    </li><!-- End Messages Nav -->
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Kevin Anderson</h6>
+              <span>Web Designer</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-    <li class="nav-item dropdown pe-3">
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-      <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-        <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-       
-      </a><!-- End Profile Iamge Icon -->
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-        <li class="dropdown-header">
-          <h6>Kevin Anderson</h6>
-          <span>Web Designer</span>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Need Help?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-        <li>
-          <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-            <i class="bi bi-person"></i>
-            <span>My Profile</span>
-          </a>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
 
-        <li>
-          <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-            <i class="bi bi-gear"></i>
-            <span>Account Settings</span>
-          </a>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
 
-        <li>
-          <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-            <i class="bi bi-question-circle"></i>
-            <span>Need Help?</span>
-          </a>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
+      </ul>
+    </nav><!-- End Icons Navigation -->
 
-        <li>
-          <a class="dropdown-item d-flex align-items-center" href="#">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Sign Out</span>
-          </a>
-        </li>
-
-      </ul><!-- End Profile Dropdown Items -->
-    </li><!-- End Profile Nav -->
-
-  </ul>
-</nav><!-- End Icons Navigation -->
-
-</header><!-- End Header -->
+  </header><!-- End Header -->
 
 
- <!-- ======= Sidebar ======= -->
- <aside id="sidebar" class="sidebar">
-<ul class="sidebar-nav" id="sidebar-nav">
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
 
-  <li class="nav-item">
-    <a class="nav-link " href="index.html">
-      <i class="bi bi-speedometer2"></i>
-      <span>Dashboard</span>
-    </a>
-  </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link " href="index.php">
+          <i class="bi bi-speedometer2"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
 
 
 
 
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="users-profile.html">
-      <i class="bi bi-tags"></i>
-      <span>Kategori Produk</span>
-    </a>
-  </li><!-- End Profile Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+          <i class="bi bi-tags"></i>
+          <span>Kategori Produk</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-faq.html">
-      <i class="bi bi-box"></i>
-      <span>Data Produk</span>
-    </a>
-  </li><!-- End F.A.Q Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+          <i class="bi bi-box"></i>
+          <span>Data Produk</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-contact.html">
-      <i class="bi bi-bar-chart-line"></i>
-      <span>Laporan</span>
-    </a>
-  </li><!-- End Contact Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Laporan</span>
+        </a>
+      </li><!-- End Contact Page Nav -->
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-register.html">
-      <i class="bi bi-people"></i>
-      <span>Manajemen User</span>
-    </a>
-  </li><!-- End Register Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+          <i class="bi bi-people"></i>
+          <span>Manajemen User</span>
+        </a>
+      </li><!-- End Register Page Nav -->
 
 
 
-</ul>
+    </ul>
 
-</aside><!-- End Sidebar-->
+  </aside><!-- End Sidebar-->
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Kategori Produk</h1>
+      <h1>Data Produk</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-          <li class="breadcrumb-item">Kategori Produk</li>
+          <li class="breadcrumb-item">Data Produk</li>
           <li class="breadcrumb-item active">Tambah</li>
         </ol>
       </nav>
@@ -311,43 +211,73 @@
       <div class="row">
         <div class="col-lg-6">
 
-            </div>
-          </div>
+        </div>
+      </div>
 
+      </div>
+
+      <div class="col-lg-6">
+
+      <div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Tambah Produk</h5>
+
+        <form action="" class="row g-3" method="post" enctype="multipart/form-data">
+            <div class="col-12">
+                <label for="kd_produk" class="form-label">Kode Produk</label>
+                <input type="text" class="form-control" id="kd_produk" name="kd_produk" value="<?php echo $kd_produk; ?>" readonly>
+            </div>
+            <div class="col-12">
+                <label for="nm_produk" class="form-label">Nama Produk</label>
+                <input type="text" class="form-control" id="nm_produk" name="nm_produk" required>
+            </div>
+            <div class="col-12">
+                <label for="stok" class="form-label">Stok</label>
+                <input type="number" class="form-control" id="stok" name="stok" required>
+            </div>
+            <div class="col-12">
+                <label for="min_stok" class="form-label">Minimal Stok</label>
+                <input type="number" class="form-control" id="min_stok" name="min_stok" required>
+            </div>
+            <div class="col-12">
+                <label for="harga" class="form-label">Harga</label>
+                <input type="number" class="form-control" id="harga" name="harga" required>
+            </div>
+            <div class="col-12">
+                <label for="id_kategori" class="form-label">Kategori</label>
+                <select class="form-control" id="id_kategori" name="id_kategori" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    <?php
+                    include "koneksi.php";
+                    $query = mysqli_query($conn, "SELECT * FROM categories");
+                    while ($kategori = mysqli_fetch_array($query)) {
+                        echo "<option value='{$kategori['id']}'>{$kategori['category_name']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="col-12">
+                <label for="gambar" class="form-label">Gambar Produk</label>
+                <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-warning"><a href="produk.php" style="color: black; text-decoration:none;">Kembali</a></button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+            </form><!-- Vertical Form -->
+
+          </div>
         </div>
 
-        <div class="col-lg-6">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Tambah Kategori Produk</h5>
+      </div>
+      </div>
 
-              <!-- Vertical Form -->
-              <form class="row g-3" method="post">
-                <div class="col-12">
-                  <label for="kd_kat" class="form-label">Kode Kategori</label>
-                  <input type="text" class="form-control" id="kd_kat" name="kd_kat" value="<?php echo $kd_kat; ?>" readonly>
-                </div>
-                <div class="col-12">
-                  <label for="nm_kat" class="form-label">Nama Kategori</label>
-                  <input type="text" class="form-control" id="nm_kat" name="nm_kat" required>
-                </div> 
-               
-                <div class="text-center">
-                  <button type="button" class="btn btn-warning"><a href="kategori_produk.php" style="color: black; text-decoration:none;">Kembali</a></button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-                  <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
-                </div>
-              </form><!-- Vertical Form -->
-
-            </div>
-          </div>
-
-
-            </div>
-          </div>
-
-        </div>
+      </div>
       </div>
     </section>
 

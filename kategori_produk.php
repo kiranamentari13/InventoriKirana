@@ -60,7 +60,7 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-           
+
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -117,55 +117,55 @@
 
   </header><!-- End Header -->
 
- <!-- ======= Sidebar ======= -->
- <aside id="sidebar" class="sidebar">
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
 
-<ul class="sidebar-nav" id="sidebar-nav">
+    <ul class="sidebar-nav" id="sidebar-nav">
 
-  <li class="nav-item">
-    <a class="nav-link " href="index.php">
-      <i class="bi bi-speedometer2"></i>
-      <span>Dashboard</span>
-    </a>
-  </li><!-- End Dashboard Nav -->
-
-
+      <li class="nav-item">
+        <a class="nav-link " href="index.php">
+          <i class="bi bi-speedometer2"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
 
 
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="index.php">
-      <i class="bi bi-tags"></i>
-      <span>Kategori Produk</span>
-    </a>
-  </li><!-- End Profile Page Nav -->
-
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="index.php">
-      <i class="bi bi-box"></i>
-      <span>Data Produk</span>
-    </a>
-  </li><!-- End F.A.Q Page Nav -->
-
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="index.php">
-      <i class="bi bi-bar-chart-line"></i>
-      <span>Laporan</span>
-    </a>
-  </li><!-- End Contact Page Nav -->
-
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="index.php">
-      <i class="bi bi-people"></i>
-      <span>Manajemen User</span>
-    </a>
-  </li><!-- End Register Page Nav -->
 
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+          <i class="bi bi-tags"></i>
+          <span>Kategori Produk</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
 
-</ul>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+          <i class="bi bi-box"></i>
+          <span>Data Produk</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
 
-</aside><!-- End Sidebar-->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Laporan</span>
+        </a>
+      </li><!-- End Contact Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+          <i class="bi bi-people"></i>
+          <span>Manajemen User</span>
+        </a>
+      </li><!-- End Register Page Nav -->
+
+
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
   <main id="main" class="main">
 
     <div class="pagetitle">
@@ -173,20 +173,20 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-          
+
           <li class="breadcrumb-item active">Kategori Produk</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
     <div class="row">
-        <div class="col-lg-12">
+      <div class="col-lg-12">
 
-          <div class="card">
-            <div class="card-body mt-3">
-              <a href="t_kat.php" class="btn btn-primary">Tambah Data</a>
-            </div>
+        <div class="card">
+          <div class="card-body mt-3">
+            <a href="t_kat.php" class="btn btn-primary">Tambah Data</a>
           </div>
         </div>
+      </div>
     </div>
 
     <section class="section">
@@ -206,7 +206,22 @@
                   </tr>
                 </thead>
                 <tbody>
-                 
+                  <?php
+                  include "koneksi.php";
+                  $no = 1;
+                  $sql = mysqli_query($conn, "SELECT*FROM categories");
+                  while ($data = mysqli_fetch_array($sql)) {
+                  ?>
+                    <tr>
+                      <td><?php echo $no++; ?></td>
+                      <td><?php echo $data['kd_kat']; ?></td>
+                      <td><?php echo $data['category_name']; ?></td>
+                      <td>
+                        <a href="e_kat.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">Edit</a>
+                        <a href="h_kat.php?id=<?php echo $data['id']; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data?')">Hapus</a>
+                      </td>
+                    </tr>
+                  <?php } ?>
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
