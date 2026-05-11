@@ -26,6 +26,7 @@ if (isset($_POST['simpan'])) {
   }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +34,7 @@ if (isset($_POST['simpan'])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Data Produk - InventoriKirana</title>
+  <title>Kategori Produk - InventoriKirana</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -57,6 +58,7 @@ if (isset($_POST['simpan'])) {
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -67,29 +69,20 @@ if (isset($_POST['simpan'])) {
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">InventoriKirana</span>
+        <span class="d-none d-lg-block">CintaJeno</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
 
-
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
-
-        </li><!-- End Messages Nav -->
 
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -149,42 +142,39 @@ if (isset($_POST['simpan'])) {
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
+
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.php">
+        <a class="nav-link collapsed" href="index.php">
           <i class="bi bi-speedometer2"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
-
-
-
-
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="nav-link" href="kategori_produk.php">
           <i class="bi bi-tags"></i>
           <span>Kategori Produk</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="nav-link collapsed" href="produk.php">
           <i class="bi bi-box"></i>
           <span>Data Produk</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="nav-link collapsed" href="laporan.php">
           <i class="bi bi-bar-chart-line"></i>
           <span>Laporan</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="nav-link collapsed" href="users.php">
           <i class="bi bi-people"></i>
           <span>Manajemen User</span>
         </a>
@@ -195,14 +185,15 @@ if (isset($_POST['simpan'])) {
     </ul>
 
   </aside><!-- End Sidebar-->
+
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Data Produk</h1>
+      <h1>Kategori Produk</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-          <li class="breadcrumb-item">Data Produk</li>
+          <li class="breadcrumb-item">Kategori Ptoduk</li>
           <li class="breadcrumb-item active">Tambah</li>
         </ol>
       </nav>
@@ -211,67 +202,48 @@ if (isset($_POST['simpan'])) {
       <div class="row">
         <div class="col-lg-6">
 
+
+
         </div>
+      </div>
+
+
+
+      </div>
       </div>
 
       </div>
 
       <div class="col-lg-6">
 
-      <div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Tambah Produk</h5>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Tambah Kategori Produk</h5>
 
-        <form action="" class="row g-3" method="post" enctype="multipart/form-data">
-            <div class="col-12">
-                <label for="kd_produk" class="form-label">Kode Produk</label>
-                <input type="text" class="form-control" id="kd_produk" name="kd_produk" value="<?php echo $kd_produk; ?>" readonly>
-            </div>
-            <div class="col-12">
-                <label for="nm_produk" class="form-label">Nama Produk</label>
-                <input type="text" class="form-control" id="nm_produk" name="nm_produk" required>
-            </div>
-            <div class="col-12">
-                <label for="stok" class="form-label">Stok</label>
-                <input type="number" class="form-control" id="stok" name="stok" required>
-            </div>
-            <div class="col-12">
-                <label for="min_stok" class="form-label">Minimal Stok</label>
-                <input type="number" class="form-control" id="min_stok" name="min_stok" required>
-            </div>
-            <div class="col-12">
-                <label for="harga" class="form-label">Harga</label>
-                <input type="number" class="form-control" id="harga" name="harga" required>
-            </div>
-            <div class="col-12">
-                <label for="id_kategori" class="form-label">Kategori</label>
-                <select class="form-control" id="id_kategori" name="id_kategori" required>
-                    <option value="">-- Pilih Kategori --</option>
-                    <?php
-                    include "koneksi.php";
-                    $query = mysqli_query($conn, "SELECT * FROM categories");
-                    while ($kategori = mysqli_fetch_array($query)) {
-                        echo "<option value='{$kategori['id']}'>{$kategori['category_name']}</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <div class="col-12">
-                <label for="gambar" class="form-label">Gambar Produk</label>
-                <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
-            </div>
-            <div class="text-center">
-                <button type="button" class="btn btn-warning"><a href="produk.php" style="color: black; text-decoration:none;">Kembali</a></button>
+            <!-- Vertical Form -->
+            <form class="row g-3" method="post">
+              <div class="col-12">
+                <label for="kd_kat" class="form-label">Kode Kategori</label>
+                <input type="text" class="form-control" id="kd_kat" name="kd_kat" value="<?php echo $kd_kat; ?>" readonly>
+              </div>
+              <div class="col-12">
+                <label for="nm_kat" class="form-label">Nama kategori</label>
+                <input type="text" class="form-control" id="nm_kat" name="nm_kat" required>
+              </div>
+
+              <div class="text-center">
+                <button type="button" class="btn btn-warning"><a href="kategori_produk.php" style="color: black; text-decoration:none;">Kembali<a></button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
                 <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
-            </div>
-        </form>
-    </div>
-</div>
+              </div>
             </form><!-- Vertical Form -->
 
           </div>
         </div>
+
+      </div>
+      </div>
+
 
 
       </div>
@@ -286,14 +258,14 @@ if (isset($_POST['simpan'])) {
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>InventoriKirana</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      Designed by <a href="">Kirana Cinta</a>
     </div>
   </footer><!-- End Footer -->
 
