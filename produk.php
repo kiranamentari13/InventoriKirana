@@ -36,7 +36,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="index.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">InventoriKirana</span>
       </a>
@@ -174,8 +174,8 @@
 
         <div class="card">
           <div class="card-body mt-3">
-            <a herf="t_produk.php" class="btn btn-primary">Tambah Data</a>
-            <a herf="stok.php" class="btn btn-dark">Stok</a>
+            <a href="t_produk.php" class="btn btn-primary">Tambah Data</a>
+            <a href="stok.php" class="btn btn-dark">Stok</a>
           </div>
         </div>
       </div>
@@ -259,7 +259,7 @@
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">Inventori Kirana</a>
+      Designed by <a href="https://bootstrapmade.com/">KiranaCintaMentari</a>
     </div>
   </footer><!-- End Footer -->
 

@@ -1,3 +1,23 @@
+<?php
+// total stok
+$total_item = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM products"));
+// Total transaksi barang masuk
+$total_barang_masuk = mysqli_num_rows(mysqli_query(
+  $conn,
+  "SELECT id FROM stock_logs WHERE change_type = 'ADD'"
+));
+
+// Total transaksi barang keluar
+$total_barang_keluar = mysqli_num_rows(mysqli_query(
+  $conn,
+  "SELECT id FROM stock_logs WHERE change_type = 'REDUCE'"
+));
+
+// Total item dengan stok kritis / minimum
+$total_stok_kritis = mysqli_num_rows(mysqli_query(
+  $conn, "SELECT id FROM products WHERE stock <= min_stock"
+));
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -183,17 +203,24 @@
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-6">
 
-          <div class="card">
+      <!-- Laporan Stok Barang -->
+        <div class="col-lg-6"> 
+          <div class="card shadow-sm">
             <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+              <h5 class="card-title">Laporan Stok Barang</h5>
+              <p class="text-muted">Menampilkan seluruh data stok barang saat ini.</p>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-primary">Total Item: <?=  $total_item; ?></span>
+                <a href="laporan_stok.php" class="btn btn-sm btn-primary" target="_blank">
+                  Lihat Laporan
+                </a>
+              </div>
             </div>
           </div>
 
-        </div>
-
+        
         <div class="col-lg-6">
 
           <div class="card">
@@ -212,14 +239,14 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>InventoriKirana</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      Designed by <a href="https://bootstrapmade.com/">KiranaCintaMentari</a>
     </div>
   </footer><!-- End Footer -->
 

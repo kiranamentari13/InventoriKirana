@@ -99,7 +99,7 @@ if (isset($_POST['update'])) {
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.php" class="logo d-flex align-items-center">
                 <img src="assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">Nama Sistem</span>
+                <span class="d-none d-lg-block">InventoriKirana</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -187,7 +187,7 @@ if (isset($_POST['update'])) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="produk.php">
                     <i class="bi bi-question-circle"></i>
-                    <span>Data_Produk</span>
+                    <span>Data Produk</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
 
@@ -226,7 +226,7 @@ if (isset($_POST['update'])) {
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Tambah Produk</h5>
+                            <h5 class="card-title">Edit Produk</h5>
 
                             <!-- Vertical Form -->
                             <form class="row g-3" method="post" enctype="multipart/form-data">
@@ -236,7 +236,7 @@ if (isset($_POST['update'])) {
                                 </div>
                                 <div class="col-12">
                                     <label for="nm_produk" class="form-label">Nama Produk</label>
-                                    <input type="email" class="form-control" id="nm_produk" name="nm_produk" value="<?php echo $hasil['product_name']; ?>" required>
+                                    <input type="text" class="form-control" id="nm_produk" name="nm_produk" value="<?php echo $hasil['product_name']; ?>" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="stok" class="form-label">Stok</label>
@@ -300,10 +300,10 @@ if (isset($_POST['update'])) {
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>Nama Sistem</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>InventoriKirana</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            Designed by <a href="">Nama Kalian</a>
+            Designed by <a href="">KiranaCintaMentari</a>
         </div>
     </footer><!-- End Footer -->
 

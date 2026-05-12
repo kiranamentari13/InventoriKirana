@@ -58,7 +58,7 @@ if (isset($_POST['update'])) {
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.php" class="logo d-flex align-items-center">
                 <img src="assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">Inventori Kirana</span>
+                <span class="d-none d-lg-block">InventoriKirana</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -146,7 +146,7 @@ if (isset($_POST['update'])) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="produk.php">
                     <i class="bi bi-question-circle"></i>
-                    <span>Data_Produk</span>
+                    <span>Data Produk</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
 
@@ -185,7 +185,7 @@ if (isset($_POST['update'])) {
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Vertical Form</h5>
+                            <h5 class="card-title">Edit Kategori Produk</h5>
 
                             <!-- Vertical Form -->
                             <form class="row g-3" method="post">
@@ -218,7 +218,7 @@ if (isset($_POST['update'])) {
             &copy; Copyright <strong><span>InventoriKirana</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            Designed by <a href="">Kirana Cinta</a>
+            Designed by <a href="">KiranaCintaMentari</a>
         </div>
     </footer><!-- End Footer -->
 

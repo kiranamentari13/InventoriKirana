@@ -88,7 +88,7 @@ if (isset($_POST['simpan'])) {
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
                 <img src="assets/img/logo.png" alt="">
                 <span class="d-none d-lg-block">InventoriKirana</span>
             </a>
@@ -99,14 +99,6 @@ if (isset($_POST['simpan'])) {
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
-
-                </li><!-- End Messages Nav -->
 
                 <li class="nav-item dropdown pe-3">
 
@@ -181,10 +173,6 @@ if (isset($_POST['simpan'])) {
                 </a>
             </li><!-- End Dashboard Nav -->
 
-
-
-
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="kategori_produk.php">
                     <i class="bi bi-tags"></i>
@@ -232,13 +220,6 @@ if (isset($_POST['simpan'])) {
         </div><!-- End Page Title -->
         <section class="section">
             <div class="row">
-                <div class="col-lg-6">
-
-                </div>
-            </div>
-
-            </div>
-
             <div class="col-lg-6">
 
                 <div class="card">
@@ -309,14 +290,14 @@ if (isset($_POST['simpan'])) {
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>InventoriKirana</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
             <!-- You can delete the links only if you purchased the pro version. -->
             <!-- Licensing information: https://bootstrapmade.com/license/ -->
             <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Designed by <a href="https://bootstrapmade.com/">KiranaCintaMentari</a>
         </div>
     </footer><!-- End Footer -->
 
