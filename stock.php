@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Components / Accordion - InventoriKirana</title>
+  <title>Manajemen Stok- InventoriKirana</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -165,24 +165,45 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Stock</h1>
+      <h1>Manajemen Stok</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-          <li class="breadcrumb-item active">Stock</li>
+          <li class="breadcrumb-item">Data Produk</li>
+          <li class="breadcrumb-item active">Manajemen Stok</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-6">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-            </div>
+        <!-- FORM MANAJEMEN STOK -->
+        <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Manajemen Stok</h5>
+
+                <form method="POST">
+                  <div class="mb-3>
+                    <label class="form-label">Pilih Produk</label>
+                    <select name="product_id" class="form-select" required>
+                      <option selected disabled>-- Pilih Produk--</option>
+                      <?php
+                      include "koneksi.php";
+                      $produk = mysqli_query($conn, "SELECT * FROM products");
+                      while ($p = mysqli_fetch_assoc($produk)) 
+                      {
+                          echo "<option value='{$p['id']}'>{$p['product_name']}</option>
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-3">
+                        
+                  </div>
+
           </div>
 
         </div>
