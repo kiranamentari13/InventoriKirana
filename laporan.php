@@ -138,14 +138,11 @@ $total_stok_kritis = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM product
 <ul class="sidebar-nav" id="sidebar-nav">
 
   <li class="nav-item">
-    <a class="nav-link " href="index.php">
+    <a class="nav-link collapsed " href="index.php">
       <i class="bi bi-speedometer2"></i>
       <span>Dashboard</span>
     </a>
   </li><!-- End Dashboard Nav -->
-
-
-
 
 
   <li class="nav-item">
@@ -163,7 +160,7 @@ $total_stok_kritis = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM product
   </li><!-- End F.A.Q Page Nav -->
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="laporan.php">
+    <a class="nav-link " href="laporan.php">
       <i class="bi bi-bar-chart-line"></i>
       <span>Laporan</span>
     </a>

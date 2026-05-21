@@ -114,7 +114,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.php">
+        <a class="nav-link collapsed " href="index.php">
           <i class="bi bi-speedometer2"></i>
           <span>Dashboard</span>
         </a>
@@ -132,7 +132,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.php">
+        <a class="nav-link " href="produk.php">
           <i class="bi bi-box"></i>
           <span>Data Produk</span>
         </a>
@@ -175,7 +175,7 @@
         <div class="card">
           <div class="card-body mt-3">
             <a href="t_produk.php" class="btn btn-primary">Tambah Data</a>
-            <a href="stok.php" class="btn btn-dark">Stok</a>
+            <a href="stock.php" class="btn btn-dark">Stok</a>
           </div>
         </div>
       </div>
@@ -252,7 +252,7 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>Inventori Kirana</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>InventoriKirana</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->

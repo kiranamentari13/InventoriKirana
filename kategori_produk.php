@@ -43,14 +43,8 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-
-
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-
-       
-
-
 
         <li class="nav-item dropdown pe-3">
 
@@ -119,18 +113,14 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.php">
+        <a class="nav-link collapsed" href="index.php">
           <i class="bi bi-speedometer2"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
-
-
-
-
       <li class="nav-item">
-        <a class="nav-link collapsed" href="kategori_produk.php">
+        <a class="nav-link" href="kategori_produk.php">
           <i class="bi bi-tags"></i>
           <span>Kategori Produk</span>
         </a>
@@ -156,8 +146,6 @@
           <span>Manajemen User</span>
         </a>
       </li><!-- End Register Page Nav -->
-
-
 
     </ul>
 

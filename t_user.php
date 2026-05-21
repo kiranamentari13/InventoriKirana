@@ -75,7 +75,7 @@ if (isset($_POST['simpan'])) {
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.php" class="logo d-flex align-items-center">
                 <img src="assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">Nama Sistem</span>
+                <span class="d-none d-lg-block">InventoriKirana</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -240,7 +240,8 @@ if (isset($_POST['simpan'])) {
                                     <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
                                 
                                 </div>
-                            </form><!-- Vertical Form -->
+                            </form>
+                            <!-- Vertical Form -->
 
                         </div>
                     </div>
