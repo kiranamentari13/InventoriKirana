@@ -18,7 +18,7 @@ function query($query)
     return $rows;
 }
 
-// Ambil data produk + kategori
+// Ambil data produk dengan stok minimum
 $data = query("
     SELECT
         p.id,
@@ -33,6 +33,7 @@ $data = query("
         u.name AS created_by
     FROM products p 
     JOIN categories c ON p.category_id = c.id
+    WHERE p.stock <= p.min_stock
     ORDER BY p.stock ASC
 ");
 
@@ -62,6 +63,7 @@ $html = '
             text-align: center;
             color: 0;
             margin-bottom: 20px;
+            color: #dc3545;
         }
 
         table {
@@ -71,7 +73,7 @@ $html = '
         }
 
         thead th {
-            background-color: #4e73df;
+            background-color: #dc3545;
             color: white;
             padding: 10px;
             font-size: 12px;
@@ -101,17 +103,14 @@ $html = '
             object-fit: cover;
         }
 
-        .stok-aman {
-            color: greeh;
-            font-weight: bold;
-        }
-
-        .stok-minim {
+        .stok-minimum {
             color: red;
             font-weight: bold;
         }
 
-        
+        .warning {
+            background-color: #ffe5e5;
+        }
     </style>
 </head>
 
@@ -119,7 +118,7 @@ $html = '
 
 <h1>InventoriKirana</h1>
 <hr>
-<h3>LAPORAN STOK BARANG</h3>
+<h3>LAPORAN STOK MINIMUM</h3>
 
 <table>
     <thead>
@@ -130,8 +129,8 @@ $html = '
             <th>Nama Produk</th>
             <th>Kategori</th>
             <th>Harga</th>
-            <th>Stok</th>
-            <th>Min. Stok</th>
+            <th>Stok Saat Ini</th>
+            <th>Minimal Stok </th>
             <th>Status</th>
             <th>Tanggal Dibuat</th>
         </tr>
@@ -145,13 +144,6 @@ $no = 1;
 foreach ($data as$row) {
 
     $harga = "Rp ". number_format($row['price'], 0,',', '.');
-
-    // Status stok
-    if ($row['stock'] <= $row['min_stock']) {
-        $status = '<span class="stok-minim">Stok Minim</span>';
-    } else {
-        $status = '<span class="stok-aman">Aman</span>';
-    }
 
     // Path gambar
     $gambar ='produk_img' . $row['gambar'];
@@ -171,9 +163,9 @@ foreach ($data as$row) {
             <td>' . $row['product_name'] . '</td>
             <td>' . $row['category_name'] . '</td>
             <td class="text-right">' . $harga . '</td>                         
-            <td class="text-center">' . $row['stock'] . '</td>
+            <td class="text-center stok-minimum">' . $row['stock'] . '</td>
             <td class="text-center">' . $row['min_stock'] . '</td>
-            <td class="text-center">' . $status . '</td>
+            <td class="text-center stok-minimum">Stok Minimum</td>
             <td class="text-center">' . date('d-m-Y H:i', strtotime($row['created_at'])) . '</td>        
         </tr>
     ';

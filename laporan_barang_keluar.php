@@ -18,22 +18,25 @@ function query($query)
     return $rows;
 }
 
-// Ambil data produk + kategori
+// Ambil data barang keluar
 $data = query("
     SELECT
-        p.id,
+        sl.id,
         p.product_code,
         p.product_name,
         c.category_name,
-        p.stock,
-        p.min_stock,
-        p.price,
-        p.gambar,
-        p.created_at,
+        sl.qty,
+        sl.stock_before,
+        sl.stock_after,
+        sl.note,
+        sl.created_at,
         u.name AS created_by
-    FROM products p 
+    FROM stock_logs sl
+    JOIN products p ON sl.product_id = p.id
     JOIN categories c ON p.category_id = c.id
-    ORDER BY p.stock ASC
+    JOIN users u ON sl.created_by = u.id
+    WHERE sl.change_type = 'REDUCE'
+    ORDER BY sl.created_at DESC
 ");
 
 // Inisialisasi mPDF
@@ -44,7 +47,7 @@ $mpdf = new \Mpdf\Mpdf([
 $html = '
 <html>
 <head>
-    <title>Laporan Stok Minimum</title>
+    <title>Laporan Barang Keluar</title>
     
     <style>
         body {
@@ -71,7 +74,7 @@ $html = '
         }
 
         thead th {
-            background-color: #4e73df;
+            background-color: #dc3545;
             color: white;
             padding: 10px;
             font-size: 12px;
@@ -84,34 +87,17 @@ $html = '
         }
         
         tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
+            background-color: #f2f2f2;
         }
 
         .text-center {
             text-align: center;
         }
 
-        .text-right {
-            text-align: right;
-        }
-
-        img {
-            width: 70px;
-            height: 70px;
-            object-fit: cover;
-        }
-
-        .stok-aman {
-            color: greeh;
-            font-weight: bold;
-        }
-
-        .stok-minim {
+        .qty-keluar {
             color: red;
             font-weight: bold;
         }
-
-        
     </style>
 </head>
 
@@ -119,21 +105,21 @@ $html = '
 
 <h1>InventoriKirana</h1>
 <hr>
-<h3>LAPORAN STOK BARANG</h3>
+<h3>LAPORAN BARANG MASUK</h3>
 
 <table>
     <thead>
         <tr>
             <th>No</th>
-            <th>Gambar</th>
+            <th>Tanggal</th>
             <th>Kode Produk</th>
             <th>Nama Produk</th>
             <th>Kategori</th>
-            <th>Harga</th>
-            <th>Stok</th>
-            <th>Min. Stok</th>
-            <th>Status</th>
-            <th>Tanggal Dibuat</th>
+            <th>Qty Keluar</th>
+            <th>Stok Sebelum</th>
+            <th>Stok Sesudah</th>
+            <th>Keterangan</th>
+            <th>Diinput Oleh</th>
         </tr>
     </thead>
 
@@ -144,37 +130,18 @@ $no = 1;
 
 foreach ($data as$row) {
 
-    $harga = "Rp ". number_format($row['price'], 0,',', '.');
-
-    // Status stok
-    if ($row['stock'] <= $row['min_stock']) {
-        $status = '<span class="stok-minim">Stok Minim</span>';
-    } else {
-        $status = '<span class="stok-aman">Aman</span>';
-    }
-
-    // Path gambar
-    $gambar ='produk_img' . $row['gambar'];
-
-    // Jika Gambar Kosong
-    if (empty($row['gambar']) || !file_exists($gambar)) {
-        $gambarHtml = '-';
-    } else {
-        $gambarHtml = '<img src="' . $gambar . '">';
-    }
-
     $html .= '
-        <tr class="warning">
+        <tr>
             <td class="text-center">' . $no++ . '</td>
-            <td class="text-center">' . $gambarHtml . '</td>
+            <td class="text-center">' . date('d-m-Y H:i', strtotime($row['created_at'])) . '</td>
             <td>' . $row['product_code'] . '</td>
             <td>' . $row['product_name'] . '</td>
             <td>' . $row['category_name'] . '</td>
-            <td class="text-right">' . $harga . '</td>                         
-            <td class="text-center">' . $row['stock'] . '</td>
-            <td class="text-center">' . $row['min_stock'] . '</td>
-            <td class="text-center">' . $status . '</td>
-            <td class="text-center">' . date('d-m-Y H:i', strtotime($row['created_at'])) . '</td>        
+            <td class="text-center qty-keluat">+' . $row['qty'] . '</td>
+            <td class="text-center">' . $row['stock_before'] . '</td>
+            <td class="text-center">' . $row['stock_after'] . '</td>
+            <td>' . $row['note'] . '</td>
+            <td class="text-center">' . $row['created_at'] . '</td>          
         </tr>
     ';
 }
@@ -189,5 +156,5 @@ $html .= '
 
 // Generate PDF
 $mpdf->WriteHTML($html);
-$mpdf->Output('laporan_stok_minimum.pdf', 'I');
+$mpdf->Output('laporan_barang_keluar.pdf', 'I');
 ?>
