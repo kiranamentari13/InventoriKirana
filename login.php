@@ -29,13 +29,13 @@ if (isset($_POST['login'])) {
         header("Location: index.php");
         exit; 
       } else { 
-        echo "<script>alert('Akun tidak aktif');</script>";
+          echo "<script>alert('Akun tidak aktif');</script>";
       }
     } else {
-      echo "<script>alert('Password salah');</script>";
+        echo "<script>alert('Password salah');</script>";
     }
   } else {
-    echo "<script>alert('Email tidak ditemukan');</script>";
+      echo "<script>alert('Email tidak ditemukan');</script>";
   }
 }
 ?>
@@ -105,8 +105,8 @@ if (isset($_POST['login'])) {
                         <label class="form-label">Email</label>
                         <input type="email" name="email" class="form-control" required>
                         <div class="invalid-feedback">Please enter your email.</div>
-                      </div>
                     </div>
+              
 
                     <div class="col-12">
                       <label class="form-label">Password</label>

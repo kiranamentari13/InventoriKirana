@@ -189,26 +189,42 @@ if (isset($_POST['update'])) {
                             <h5 class="card-title">Vertical Form</h5>
 
                             <!-- Vertical Form -->
-                            
-                            <div class="col-12">
-                                <label class="form-label">Role</label>
-                                <select class="form-control" name="role" required>
-                                    <option value="admin" <?php if ($user['role'] == 'admin') echo 'selected'; ?>>Admin</option>
-                                    <option value="staff" <?php if ($user['role'] == 'staff') echo 'selected'; ?>>Staff</option>
-                                </select>
-                            </div>
+                            <form class="row g-3" method="post" enctype="multipart/form-data">
+                                <div class="col-12">
+                                    <label for="name" class="form-label">Nama</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="<?php echo $user['name']; ?>" readonly>
+                                </div>
+                                <div class="col-12">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $user['email']; ?>" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password">
+                                    <small class="text-muted">Kosongkan jika tidak ingin mengganti password</small>
+                                </div>
 
-                            <div class="col-12">
-                                <label class="form-label">Status</label>
-                                <select class="form-control" name="is_active">
-                                    <option value="1" <?php if ($user['is_active'] == 1) echo 'selected'; ?>>Aktif</option>
-                                    <option value="0" <?php if ($user['is_active'] == 0) echo 'selected'; ?>>Nonaktif</option>
-                                </select>
-                            </div>
-                            <div class="text-center">
-                                <a href="users.php" class="btn btn-warning">Kembali</a>
-                                <button type="submit" class="btn btn-success" name="update">Update</button>
-                            </div>
+                                <div class="col-12">
+                                    <label class="form-label">Role</label>
+                                    <select class="form-control" name="role" required>
+                                        <option value="admin" <?php if ($user['role'] == 'admin') echo 'selected'; ?>>Admin</option>
+                                        <option value="staff" <?php if ($user['role'] == 'staff') echo 'selected'; ?>>Staff</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-control" name="is_active">
+                                        <option value="1" <?php if ($user['is_active'] == 1) echo 'selected'; ?>>Aktif</option>
+                                        <option value="0" <?php if ($user['is_active'] == 0) echo 'selected'; ?>>Nonaktif</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="text-center">
+                                    <a href="users.php" class="btn btn-warning">Kembali</a>
+                                    <button type="submit" class="btn btn-success" name="update">Update</button>
+                                </div>
                             </form><!-- Vertical Form -->
 
                         </div>

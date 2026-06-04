@@ -147,7 +147,7 @@
         </div>
       </div>
       <!-- Table with stripped rows -->
-      <class="table-datable">
+      <table class="table datatable">
         <thead>
           <tr>
             <th>No</th>
@@ -192,11 +192,7 @@
               </tr>
           <?php } ?>
         </tbody>
-            <!-- End Table with stripped rows -->
-            </div>
-          </div>
-        </div>
-      </div>
+      </table>
     </section>
 
   </main><!-- End #main -->
