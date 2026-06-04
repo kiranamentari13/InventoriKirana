@@ -1,3 +1,4 @@
+
 <?php
 include "koneksi.php";
 
@@ -88,7 +89,7 @@ if (isset($_POST['update'])) {
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.php" class="logo d-flex align-items-center">
                 <img src="assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">Nama Sistem</span>
+                <span class="d-none d-lg-block">InventoriKirana</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -123,49 +124,50 @@ if (isset($_POST['update'])) {
 
     </header><!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
+       <!-- ======= Sidebar ======= -->
+       <aside id="sidebar" class="sidebar">
 
-        <ul class="sidebar-nav" id="sidebar-nav">
+<ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="index.php">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="index.php">
+      <i class="bi bi-speedometer2"></i>
+      <span>Dashboard</span>
+    </a>
+  </li><!-- End Dashboard Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="kategori_produk.php">
-                    <i class="bi bi-person"></i>
-                    <span>Kategori Produk</span>
-                </a>
-            </li><!-- End Profile Page Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="kategori_produk.php">
+      <i class="bi bi-tags"></i>
+      <span>Kategori Produk</span>
+    </a>
+  </li><!-- End Profile Page Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="produk.php">
-                    <i class="bi bi-question-circle"></i>
-                    <span>Data_Produk</span>
-                </a>
-            </li><!-- End F.A.Q Page Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="produk.php">
+      <i class="bi bi-box"></i>
+      <span>Data Produk</span>
+    </a>
+  </li><!-- End F.A.Q Page Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="laporan.php">
-                    <i class="bi bi-envelope"></i>
-                    <span>Laporan</span>
-                </a>
-            </li><!-- End Contact Page Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="laporan.php">
+      <i class="bi bi-bar-chart-line"></i>
+      <span>Laporan</span>
+    </a>
+  </li><!-- End Contact Page Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="users.php">
-                    <i class="bi bi-card-list"></i>
-                    <span>Manajemen User</span>
-                </a>
-            </li><!-- End Register Page Nav -->
-        </ul>
+  <li class="nav-item">
+    <a class="nav-link " href="users.php">
+      <i class="bi bi-people"></i>
+      <span>Manajemen User</span>
+    </a>
+  </li><!-- End Register Page Nav -->
 
-    </aside><!-- End Sidebar-->
 
+</ul>
+
+</aside><!-- End Sidebar-->
     <main id="main" class="main">
 
         <div class="pagetitle">
@@ -187,6 +189,7 @@ if (isset($_POST['update'])) {
                             <h5 class="card-title">Vertical Form</h5>
 
                             <!-- Vertical Form -->
+                            
                             <div class="col-12">
                                 <label class="form-label">Role</label>
                                 <select class="form-control" name="role" required>
@@ -201,35 +204,6 @@ if (isset($_POST['update'])) {
                                     <option value="1" <?php if ($user['is_active'] == 1) echo 'selected'; ?>>Aktif</option>
                                     <option value="0" <?php if ($user['is_active'] == 0) echo 'selected'; ?>>Nonaktif</option>
                                 </select>
-                            </div>
-
-                            <div class="text-center">
-                                <a href="users.php" class="btn btn-warning">Kembali</a>
-                                <button type="submit" class="btn btn-success" name="update">Update</button>
-                            </div>
-                            <div class="text-center">
-                                <a href="users.php" class="btn btn-warning">Kembali</a>
-                                <button type="submit" class="btn btn-success" name="update">Update</button>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">Role</label>
-                                <select class="form-control" name="role" required>
-                                    <option value="admin" <?php if ($user['role'] == 'admin') echo 'selected'; ?>>Admin</option>
-                                    <option value="staff" <?php if ($user['role'] == 'staff') echo 'selected'; ?>>Staff</option>
-                                </select>
-                            </div>
-
-                            <div class="col-12">
-                                <label class="form-label">Status</label>
-                                <select class="form-control" name="is_active">
-                                    <option value="1" <?php if ($user['is_active'] == 1) echo 'selected'; ?>>Aktif</option>
-                                    <option value="0" <?php if ($user['is_active'] == 0) echo 'selected'; ?>>Nonaktif</option>
-                                </select>
-                            </div>
-
-                            <div class="text-center">
-                                <a href="users.php" class="btn btn-warning">Kembali</a>
-                                <button type="submit" class="btn btn-success" name="update">Update</button>
                             </div>
                             <div class="text-center">
                                 <a href="users.php" class="btn btn-warning">Kembali</a>
@@ -248,10 +222,10 @@ if (isset($_POST['update'])) {
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>Nama Sistem</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>InventoriKirana</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            Designed by <a href="">Nama Kalian</a>
+            Designed by <a href="">KiranaCintaMentari</a>
         </div>
     </footer><!-- End Footer -->
 

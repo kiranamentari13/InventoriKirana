@@ -1,3 +1,4 @@
+
 <?php
 include "koneksi.php";
 
@@ -25,7 +26,7 @@ if (isset($_POST['simpan'])) {
     }
    
     // insert data
-    $query = mysqli_query($conn, "INSERT INTO users (name, email, password, role, is_active) VALUES ('$name', '$email', '$password', '$role', '$is_active')")
+    $query = mysqli_query($conn, "INSERT INTO users (name, email, password, role, is_active) VALUES ('$name', '$email', '$password', '$role', '$is_active')");
     if ($query) {
         echo "<script>alert('User berhasil ditambahkan!'); window.location='users.php';</script>";
     } else {
@@ -113,45 +114,47 @@ if (isset($_POST['simpan'])) {
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
-        <ul class="sidebar-nav" id="sidebar-nav">
+<ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="index.php">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="index.php">
+      <i class="bi bi-speedometer2"></i>
+      <span>Dashboard</span>
+    </a>
+  </li><!-- End Dashboard Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="kategori_produk.php">
-                    <i class="bi bi-person"></i>
-                    <span>Kategori Produk</span>
-                </a>
-            </li><!-- End Profile Page Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="kategori_produk.php">
+      <i class="bi bi-tags"></i>
+      <span>Kategori Produk</span>
+    </a>
+  </li><!-- End Profile Page Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="produk.php">
-                    <i class="bi bi-question-circle"></i>
-                    <span>Data_Produk</span>
-                </a>
-            </li><!-- End F.A.Q Page Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="produk.php">
+      <i class="bi bi-box"></i>
+      <span>Data Produk</span>
+    </a>
+  </li><!-- End F.A.Q Page Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="laporan.php">
-                    <i class="bi bi-envelope"></i>
-                    <span>Laporan</span>
-                </a>
-            </li><!-- End Contact Page Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="laporan.php">
+      <i class="bi bi-bar-chart-line"></i>
+      <span>Laporan</span>
+    </a>
+  </li><!-- End Contact Page Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="users.php">
-                    <i class="bi bi-card-list"></i>
-                    <span>Manajemen User</span>
-                </a>
-            </li><!-- End Register Page Nav -->
-        </ul>
+  <li class="nav-item">
+    <a class="nav-link " href="users.php">
+      <i class="bi bi-people"></i>
+      <span>Manajemen User</span>
+    </a>
+  </li><!-- End Register Page Nav -->
 
-    </aside><!-- End Sidebar-->
+
+</ul>
+
+</aside><!-- End Sidebar-->
 
     <main id="main" class="main">
 
@@ -196,17 +199,21 @@ if (isset($_POST['simpan'])) {
                                         <option value="Admin">Admin</option>
                                         <option value="Staff">Staff</option>
                                     </select>
+                                </div>
                                 <div class="col-12">
                                     <label for="is_active" class="form-label">Status</label>
                                     <select class="form-control" name="is_active">
                                         <option value="1">Aktif</option>
                                         <option value="0">Nonaktif</option>
+                                    </select>
+                                </div>
                                 <div class="text-center">
                                     <button type="button" class="btn btn-warning">
                                         <a href="users.php" stylw="color: black; text-decoration:none;">Kembali</a>
                                     </button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                     <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
+                                </div>
                                 
                                 </div>
                             </form>

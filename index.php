@@ -1,3 +1,110 @@
+<?php
+include "koneksi.php";
+date_default_timezone_set('Asia/Jakarta');
+
+// Total Produk
+$q_produk = mysqli_query($conn, "SELECT COUNT(*) as total_produk FROM products");
+$data_produk = mysqli_fetch_assoc($q_produk);
+
+// Total stok
+$q_stok = mysqli_query($conn, "SELECT SUM(stock) as total_stok FROMproducts");
+$data_stok = mysqli_fetch_assoc($q_stok);
+
+// Total Kategori
+$q_kategori = mysqli_query($conn, "SELECT COUNT(*) as total_kategori FROM categories");
+$data_kategori = mysqli_fetch_assoc($q_kategori);
+
+// Barang Masuk per hari (bulan ini)
+$q_masuk = mysqli_query($conn, "
+  SELECT DAY(created_at) as hari, SUM(qty) as total
+  FROM stock_logs
+  WHERE change_type='ADD'
+  AND MONTH(created_at)=MONTH(CURRENT_DATE())
+  AND YEAR(created_at)=YEAR(CURRENT_DATE())
+  GROUP BY DAY(created_at)
+  ");
+
+// Barang keluar per hari (bulan ini)
+$q_keluar = mysqli_query($conn, "
+  SELECT DAY(created_at) as hari, SUM(qty) as total
+  FROM stock_logs
+  WHERE change_type='REDUCE'
+  AND MONTH(created_at)=MONTH(CURRENT_DATE())
+  AND YEAR(created_at)=YEAR(CURRENT_DATE())
+  GROUP BY DAY(created_at)
+  ");
+
+// SIAPKAN ARRAY 1-31 (default 0)
+$masuk = array_fill(1, 31, 0);
+$keluar = array_fill(1, 31, 0);
+
+// isi data masuk 
+while ($row = mysqli_fetch_assoc($q_masuk)) {
+  $masuk[$row['hari']] = (int)$row['total'];
+}
+
+// isi data keluar
+while ($row = mysqli_fetch_assoc($q_keluar)) {
+  $keluar[$row['hari']] = (int)$row['total'];
+}
+
+$query = mysqli_query($conn, "
+  SELECT p.product_name, p.stock, c.category_name
+  FROM products p
+  JOIN categories c ON p.category_id = c.id
+  ORDER BY p.crated_at DESC
+  LIMIT 5
+  ");
+
+// Ambil produk dengan stok <= min_stok
+$q_menipis = mysqli_query($conn, "
+  SELECT product_name, stock, min_stock
+  FROM products
+  WHERE stock <= min_stock
+  ORDER BY stock ASC
+  LIMIT 5
+  ");
+
+$q_aktivitas = mysqli_query($conn, "
+  SELECT sl.*, p.product_name, u.name as user_name
+  FROM stock_logssl
+  JOIN products p ON sl.product_id = p.id
+  JOIN users u ON sl.created_by = u.ud
+  ORDER BY sl.created_at DESC
+  LIMIT 5
+  ");
+
+  function waktu_lalu($datetime)
+  {
+    $selisih = time() - strtotime($datetime);
+
+    // kalau negatif, anggap 0
+    if ($selisih < 0) $selisih = 0;
+
+    $menit = floor($selisih / 60);
+    $jam = floor($selisih / 3600);
+    $hari = floor($selisih / 86400);
+
+    if ($menit < 60) {
+      return $menit . "menit lalu";
+    } elseif ($jam < 24) {
+      return $jam . "jam lalu";
+    } else {
+      return $hari . "hari lalu";
+    }
+  }
+  ?>
+
+<?php
+session_start();
+include "koneksi.php";
+
+// cek apakah user sudah login
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,10 +191,6 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
-    
-
-    
-
       <li class="nav-item">
         <a class="nav-link collapsed" href="kategori_produk.php">
           <i class="bi bi-tags"></i>
@@ -137,118 +240,75 @@
     <section class="section dashboard">
       <div class="row">
 
-        <!-- Left side columns -->
+        <!-- Left side -->
         <div class="col-lg-8">
           <div class="row">
 
-            <!-- Sales Card -->
+            <!-- TOTAL PRODUK  -->
             <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
+              <div class="card info-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Sales <span>| Today</span></h5>
+                  <h5 class="card-title">Produk <span>| Total</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
+                      <i class="bi bi-box"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                      <h6><?= $data_produk['total_produk']; ?></h6>
+                      <span class="text-muted small pt-2 ps-1">Total Produk</span>
 
                     </div>
                   </div>
                 </div>
 
               </div>
-            </div><!-- End Sales Card -->
+            </div>
 
-            <!-- Revenue Card -->
+            <!-- TOTAL STOK -->
             <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
+              <div class="card info-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Revenue <span>| This Month</span></h5>
+                  <h5 class="card-title">Stok <span>| Total</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
+                      <i class="bi bi-archive"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>$3,264</h6>
-                      <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
+                      <h6><?=  $data_stok['total_stok'] ?? 0; ?></h6>
+                      <span class="text-muted small pt-2 ps-1">Jumlah Semua Stok</span>
                     </div>
                   </div>
+
                 </div>
-
               </div>
-            </div><!-- End Revenue Card -->
+            </div>
 
-            <!-- Customers Card -->
+            <!-- KATEGORI -->
             <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
+              <div class="card info-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Customers <span>| This Year</span></h5>
+                  <h5 class="card-title">Kategori <span>| Total</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
+                      <i class="bi bi-tags"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>1244</h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
+                      <h6><?=  $data_kategori['total_kategori']; ?></h6>
+                      <span class="text-muted small pt-2 ps-1">Total Kategori</span>
                     </div>
                   </div>
 
                 </div>
               </div>
+            </div>
 
-            </div><!-- End Customers Card -->
-
-            <!-- Reports -->
+            <!-- Report / Grafik -->
             <div class="col-12">
               <div class="card">
 
@@ -259,16 +319,16 @@
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <li><a class="dropdown-item" href="#">Hari Ini</a></li>
+                    <li><a class="dropdown-item" href="#">Bulan Ini</a></li>
+                    <li><a class="dropdown-item" href="#">Tahun Ini</a></li>
                   </ul>
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
+                  <h5 class="card-title">Laporan Barng <span>| Bulan Ini</span></h5>
 
-                  <!-- Line Chart -->
+                  
                   <div id="reportsChart"></div>
 
                   <script>

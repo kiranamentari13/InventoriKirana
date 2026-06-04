@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,7 +91,7 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users.php">
+        <a class="nav-link collapsed" href="kategori_produk.php">
           <i class="bi bi-tags"></i>
           <span>Kategori Produk</span>
         </a>
@@ -146,7 +147,7 @@
         </div>
       </div>
       <!-- Table with stripped rows -->
-      <class="table datatable">
+      <class="table-datable">
         <thead>
           <tr>
             <th>No</th>
@@ -192,12 +193,10 @@
           <?php } ?>
         </tbody>
             <!-- End Table with stripped rows -->
-
             </div>
-            </div>
-
-            </div>
-            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
   </main><!-- End #main -->

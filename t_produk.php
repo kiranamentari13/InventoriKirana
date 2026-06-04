@@ -1,4 +1,14 @@
 <?php
+session_start();
+include "koneksi.php";
+
+// cek apakah user sudah login
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+<?php
 include "koneksi.php";
 
 $auto = mysqli_query($conn, "select max(product_code) as max_code from products");
