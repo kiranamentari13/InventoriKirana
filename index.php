@@ -1,4 +1,15 @@
 <?php
+session_start();
+include "koneksi.php";
+
+// cek apakah user sudah login
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
+<?php
 include "koneksi.php";
 date_default_timezone_set('Asia/Jakarta');
 
