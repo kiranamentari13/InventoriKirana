@@ -1,4 +1,14 @@
 <?php
+session_start();
+include "koneksi.php";
+
+// cek apakah user sudah login
+if (!isset($_SESSION["login"])) {
+  header("Location: login.php");
+  exit;
+}
+?>
+<?php
 include "koneksi.php";
 date_default_timezone_set('Asia/Jakarta');
 
@@ -95,16 +105,6 @@ function waktu_lalu($datetime)
 }
 ?>
 
-<?php
-session_start();
-include "koneksi.php";
-
-// cek apakah user sudah login
-if (!isset($_SESSION["login"])) {
-  header("Location: login.php");
-  exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -313,7 +313,8 @@ if (!isset($_SESSION["login"])) {
               <div class="card">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <a class="icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
                       <h6>Filter</h6>
@@ -360,34 +361,28 @@ if (!isset($_SESSION["login"])) {
                         colors: ['#4154f1', '#ff771d'],
                         fill: {
                           type: "gradient",
-                          gradient: {},
-                          colors: ['#4154f1', '#ff771d'],
-                          fill: {
-                            type: "gradient",
-                            gradient: {
+                          gradient: {
                               shadeIntensity: 1,
                               opacityFrom: 0.3,
                               opacityTo: 0.4,
                               stops: [0, 90, 100]
                             }
                           },
-                          dataLabels: {
+                        dataLabels: {
                             enabled: false
                           },
-                          stroke: {
+                        stroke: {
                             curve: 'smooth',
                             width: 2
                           },
-                          xaxis: {
+                        xaxis: {
                             categories: [...Array(31).keys()].map(i => i + 1) // tanggal 1-31
                           },
-                          tooltip: {
+                        tooltip: {
                             x: {
                               format: 'dd/MM/yy'
                             },
-                          }
-
-                        },
+                        }
                       }).render();
                     });
                   </script>
@@ -398,94 +393,87 @@ if (!isset($_SESSION["login"])) {
 
             <!-- End Line Chart -->
 
-          </div>
+            <!-- PRODUK TERBARU -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
 
-        </div>
-      </div><!-- End Reports -->
+                <div class="card-body">
+                  <h5 class="card-title">Produk Terbaru <span>| Latest</span></h5>
 
-      <!-- PRODUK TERBARU -->
-      <div class="col-12">
-        <div class="card recent-sales overflow-auto">
-
-          <div class="card-body">
-            <h5 class="card-title">Produk Terbaru <span>| Latest</span></h5>
-
-            <table class="table table-borderless datatable">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Produk</th>
-                  <th scope="col">Kategori</th>
-                  <th scope="col">Stok</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                $no = 1;
-                while ($row = mysqli_fetch_assoc($query)) :
-                ?>
-                  <tr>
-                    <th><?= $no++; ?></th>
-                    <td><?= $row['product_name']; ?></td>
-                    <td><?= $row['category_name']; ?></td>
-                    <td><?= $row['stock']; ?></td>
-                  </tr>
-                <?php endwhile; ?>
-              </tbody>
-            </table>
-
-          </div>
-
-        </div>
-      </div>
-
-
-      </div>
-      </div><!-- End Left side columns -->
-
-      <!-- Right side -->
-      <div class="col-lg-4">
-
-        <!-- STOK MENIPIS -->
-        <div class="card top-selling overflow-auto">
-
-          <div class="card-body pb-0">
-              <h5 class="card-title">Stok Menipis <span>| Warning</span></h5>
-
-              <table class="table table-borderless">
-                  <thead>
+                  <table class="table table-borderless datatable">
+                    <thead>
                       <tr>
-                          <th>Produk</th>
-                          <th>Stok</th>
-                          <th>Status</th>
+                        <th>#</th>
+                        <th>Produk</th>
+                        <th>Kategori</th>
+                        <th>Stok</th>
                       </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $no = 1;
+                      while ($row = mysqli_fetch_assoc($query)) :
+                      ?>
+                        <tr>
+                          <td><?= $no++; ?></td>
+                          <td><?= $row['product_name']; ?></td>
+                          <td><?= $row['category_name']; ?></td>
+                          <td><?= $row['stock']; ?></td>
+                        </tr>
+                      <?php endwhile; ?>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- END row dalam col-lg-8 -->
+        </div> <!-- END col-lg-8 -->
+
+        <!-- Right side -->
+        <div class="col-lg-4">
+          <div class="row">
+            <!-- STOK MENIPIS -->
+            <div class="card top-selling overflow-auto">
+
+              <div class="card-body pb-0">
+                <h5 class="card-title">Stok Menipis <span>|Warning</span></h5>
+
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th>Produk</th>
+                      <th>Stok</th>
+                      <th>Status</th>
+                    </tr>
                   </thead>
                   <tbody>
-                      <?php while ($row = mysqli_fetch_assoc($q_menipis)) : ?>
+                    <?php while ($row = mysqli_fetch_assoc($q_menipis)) : ?>
                       <tr>
                         <td><?= $row['product_name']; ?></td>
                         <td><?= $row['stock']; ?></td>
                         <td>
-                            <?php if ($row['stock'] == 0) : ?>
-                                <span class="badge bg-danger">Habis</span>
-                            <?php elseif ($row['stock'] <= ($row['min_stock'] / 2)) : ?>
-                                <span class="badge bg-danger">Hampir Habis</span>
-                            <?php else : ?>
-                                <span class="badge bg-warning">Menipis</span>
-                            <?php endif; ?>
+                          <?php if ($row['stock'] == 0) : ?>
+                            <span class="badge bg-danger">Habis</span>
+                          <?php elseif ($row['stock'] <= ($row['min_stock'] / 2)) : ?>
+                            <span class="badge bg-danger">Hampir Habis</span>
+                          <?php else : ?>
+                            <span class="badge bg-warning">Menipis</span>
+                          <?php endif; ?>
                         </td>
                       </tr>
                     <?php endwhile; ?>
                   </tbody>
-              </table>
+                </table>
 
-          </div>
+              </div>
 
-        </div>
+            </div>
 
-        <!-- AKTIVITAS -->
-        <div class="card">
-            <div class="card-body">
+            <!-- AKTIVITAS -->
+            <div class="card">
+              <div class="card-body">
                 <h5 class="card-title">Aktivitas Barang</h5>
 
                 <div class="activity">
@@ -505,35 +493,34 @@ if (!isset($_SESSION["login"])) {
 
                   ?>
 
-                     <div class="activity-item d-flex">
-                        <div class="activite-label">
-                          <?= waktu_lalu($row['created_at']); ?>
-                        </div>
-
-                        <i class="bi bi-circle-fill activity-badge <?= $color ?> align-self-start"></i>
-                        </div>
-
-                        <i class="bi bi-circle-fill activity-badge <?= $color ?> align-self-start"></i>
-
-                        <div class="activity-content">
-                            <?= $text; ?>
-                            <span class="fw-bold text-dark">
-                                "<?= $row['product_name']; ?>"
-                            </span>
-                          </div>
-
+                    <div class="activity-item d-flex">
+                      <div class="activite-label">
+                        <?= waktu_lalu($row['created_at']); ?>
                       </div>
 
-                    <?php endwhile; ?>
+
+
+                      <i class="bi bi-circle-fill activity-badge <?= $color ?> align-self-start"></i>
+
+                      <div class="activity-content">
+                        <?= $text; ?>
+                        <span class="fw-bold text-dark">
+                          "<?= $row['product_name']; ?>"
+                        </span>
+                      </div>
+
+                    </div>
+
+                  <?php endwhile; ?>
 
                 </div>
 
               </div>
+            </div>
+
           </div>
 
         </div>
-
-      </div>
     </section>
 
 

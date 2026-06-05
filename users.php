@@ -1,4 +1,13 @@
+<?php
+session_start();
+include "koneksi.php";
 
+// cek apakah user sudah login
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -185,7 +194,7 @@
 
               <td>
                 <a href="e_user.php?id=<?php echo $data['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                <a href="h_user.php?id=<?php echo $data['id']; ?>" class="btn btn-danegr btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
+                <a href="h_user.php?id=<?php echo $data['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
                   Hapus
                 </a>
               </td>
