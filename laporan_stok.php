@@ -29,8 +29,7 @@ $data = query("
         p.min_stock,
         p.price,
         p.gambar,
-        p.created_at,
-        u.name AS created_by
+        p.created_at
     FROM products p 
     JOIN categories c ON p.category_id = c.id
     ORDER BY p.stock ASC
